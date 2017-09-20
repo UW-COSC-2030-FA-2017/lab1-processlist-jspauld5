@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
 	// init variables for first, second, and last two numbers
-	int num1, num2, num3, num4;
+	double num1, num2, num3, num4;
 
 	// prompt for and get filename
 	string filename;
@@ -26,18 +26,13 @@ int main() {
 	} else {
 		// itterate through the file
 		while (!file.fail()) {
-			// set bufferPrev = the last iteration of buffer UNLESS end of file
+			// set bufferPrev to the last iteration of buffer UNLESS end of file
 			int currentPos = file.tellg();
 			if (currentPos != -1) {
 				counter++;
 				bufferPrev = buffer;
 			}
 			file >> buffer;
-			int checkWs = file.tellg();
-			if (checkWs == -1) {
-				counter--;
-				break;
-			}
 			switch (counter) {
 			case 1:
 				// set the first number
@@ -48,23 +43,19 @@ int main() {
 				num2 = buffer;
 				break;
 			}
-			cout << buffer << "\t" << bufferPrev << "\t" << currentPos << "\t" <<
-			checkWs << endl;
 		}
 	}
+	file.close();
 
 	// set the last and second to last according to which buffer
 	num3 = bufferPrev;
 	num4 = buffer;
 		
-
-	cout << "Count: " << counter << endl;
-	cout << "First: " << num1 << endl;
-	cout << "Second: " << num2 << endl;
-	cout << "Second to Last: " << num3 << endl;
-	cout << "Last: " << num4 << endl;
-
-
+	cout << "Count: " << counter << endl
+	<< "First: " << num1 << endl
+	<< "Second: " << num2 << endl
+	<< "Second to Last: " << num3 << endl
+	<< "Last: " << num4 << endl;
 
 	return 0;
 }
